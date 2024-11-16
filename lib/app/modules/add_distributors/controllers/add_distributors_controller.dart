@@ -40,6 +40,7 @@ class AddDistributorsController extends GetxController {
   }
 
   initializeData() {
+    businessName.text = retailerDistributorData?.businessName ?? "";
     businessType.text = retailerDistributorData?.businessType ?? "";
     address.text = retailerDistributorData?.address ?? "";
     gst.text = retailerDistributorData?.gstNo ?? "";
@@ -76,7 +77,7 @@ class AddDistributorsController extends GetxController {
             'city': city,
             'region_id': region,
             'area_id': area,
-            'app_pk': '1',
+            'app_pk': retailerDistributorData?.appPk ?? "1",
             'id': id.value,
             'user_id': '45',
             'bank_account_id': bankName,
@@ -122,8 +123,10 @@ class AddDistributorsController extends GetxController {
         backgroundColor: AppColors.black,
         timeInSecForIosWeb: 5,
       );
-      // await DatabaseHelper().updateDataById(id.value,  );
-      // Get.offAllNamed(Routes.BOTTOM_BAR);
+      if (id.value.isNotEmpty) {
+        await updateDataInLocale();
+      }
+      Get.offAllNamed(Routes.BOTTOM_BAR);
     } else {
       print(response.statusMessage);
       Fluttertoast.showToast(
@@ -162,6 +165,39 @@ class AddDistributorsController extends GetxController {
       );
     } else {
       addDistributors();
+    }
+  }
+
+  updateDataInLocale() async {
+    try {
+      Data data = Data(
+        address: address.text,
+        image: retailerDistributorData?.image ?? "",
+        appPk: retailerDistributorData?.appPk ?? "1",
+        areaId: area,
+        bankAccountId: bankName,
+        brands: selectedBrand,
+        businessName: businessName.text,
+        businessType: businessType.text,
+        city: city,
+        closeTime: retailerDistributorData?.closeTime,
+        gstNo: gst.text,
+        id: id.value,
+        isApproved: retailerDistributorData?.isApproved,
+        isAsync: retailerDistributorData?.isAsync,
+        isDelete: retailerDistributorData?.isDelete,
+        mobile: mobile.text,
+        name: name.text,
+        openTime: retailerDistributorData?.openTime,
+        parentId: retailerDistributorData?.parentId,
+        pincode: pin.text,
+        regionId: region,
+        state: state,
+        type: retailerDistributorData?.type,
+      );
+      await DatabaseHelper().updateDataById(id.value, data);
+    } on Exception catch (e) {
+      print("error $e");
     }
   }
 }

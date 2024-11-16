@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:kooffee_code_sql/app/modules/add_distributors/views/add_distributors_view.dart';
+import 'package:kooffee_code_sql/app/routes/app_pages.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../home/views/home_view.dart';
@@ -24,7 +25,9 @@ class BottomBarView extends GetView<BottomBarController> {
           child: Scaffold(
               backgroundColor: AppColors.white,
               floatingActionButton: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(Routes.ADD_DISTRIBUTORS);
+                },
                 child: const Icon(Icons.add),
               ),
               bottomNavigationBar: Container(

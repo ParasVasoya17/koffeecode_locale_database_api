@@ -27,7 +27,7 @@ class HomeController extends GetxController {
 
     scrollController.addListener(_onScroll);
     await loadLocalData();
-    if (retailerDistributorData == null) {
+    if (retailerDistributorData == null || retailerDistributorData!.data!.isEmpty) {
       loadMoreDistributors(isLoading: true);
     } else {
       pageNo = int.parse(retailerDistributorData?.page ?? "1");

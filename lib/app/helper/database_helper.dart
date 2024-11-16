@@ -217,11 +217,11 @@ class DatabaseHelper {
     }
   }
 
-  Future<void> updateDataById(String id, Map<String, dynamic> updatedValues) async {
+  Future<void> updateDataById(String id, Data updatedValues) async {
     final db = await database;
     await db.update(
       'distributor_data',
-      updatedValues,
+      updatedValues.toMap(),
       where: 'id = ?',
       whereArgs: [id],
     );

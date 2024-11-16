@@ -115,8 +115,8 @@ class HomeView extends GetView<HomeController> {
                                         // border: Border.all(
                                         //   color: AppColors.black,
                                         // ),
-                                        boxShadow: [
-                                          const BoxShadow(color: AppColors.grey),
+                                        boxShadow: const [
+                                          BoxShadow(color: AppColors.grey),
                                         ],
                                       ),
                                       child: Row(
